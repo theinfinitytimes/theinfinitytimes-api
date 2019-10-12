@@ -1,0 +1,23 @@
+{
+  "name": "theinfinitytimes-api",
+  "version": "0.0.1",
+  "description": "This is the API of the website theinfinitytimes.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/theinfinitytimes/theinfinitytimes-api.git"
+  },
+  "keywords": [
+    "API",
+    "nodejs"
+  ],
+  "author": "TheInfinityTimes Group",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/theinfinitytimes/theinfinitytimes-api/issues"
+  },
+  "homepage": "https://gitlab.com/theinfinitytimes/theinfinitytimes-api#readme"
+}
