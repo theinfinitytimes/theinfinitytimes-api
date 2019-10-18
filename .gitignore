@@ -1,0 +1,11 @@
+.idea
+DS_Store
+node_modules
+package-lock.json
+dist
+server/config/app.development.json
+server/config/app.production.json
+content/private
+content/user
+*.log
+npm-debug.log
