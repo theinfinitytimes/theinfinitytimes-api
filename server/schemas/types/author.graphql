@@ -1,0 +1,9 @@
+type Author {
+    account: ID!
+    posts: [ID!]!
+}
+
+input AuthorInput {
+    account: ID!
+    posts: [ID!]
+}

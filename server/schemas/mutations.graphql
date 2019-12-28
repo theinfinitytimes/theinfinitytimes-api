@@ -1,0 +1,13 @@
+#import Account, AccountInput from './types/account.graphql'
+#import Post, PostInput from './types/post.graphql'
+#import Group, GroupInput from './types/group.graphql'
+#import Author, AuthorInput from './types/author.graphql'
+#import Tag, TagInput from './types/tag.graphql'
+
+type Mutation {
+    registerAccount(account: AccountInput): Account!
+    addPost(post: PostInput): Post!
+    addGroup(group: GroupInput): Group!
+    addAuthor(author: AuthorInput): Author!
+    addTag(tag: TagInput): Tag!
+}

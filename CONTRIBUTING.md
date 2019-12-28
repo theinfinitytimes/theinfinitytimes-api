@@ -1,4 +1,4 @@
-# Contributing to theinfinitytimes.com API
+# Contributing to theinfinitytimes API
 
 Any contribution is welcome. To contribute
 

@@ -1,0 +1,25 @@
+type User {
+    givenName: String!
+    familyName: String!
+    age: Int!
+    gender: String!
+    nickname: String!
+    email: String!
+    userPassword: String!
+    verifiedEmail: Boolean!
+    memberSince: String!
+    profilePicture: String!
+}
+
+input registerUser {
+    givenName: String!
+    familyName: String!
+    age: Int!
+    gender: String!
+    nickname: String!
+    email: String!
+    userPassword: String!
+    verifiedEmail: Boolean!
+    memberSince: String!
+    profilePicture: String!
+}

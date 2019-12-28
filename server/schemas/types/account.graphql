@@ -1,0 +1,31 @@
+type Account {
+    givenName: String!
+    familyName: String!
+    age: Int!
+    gender: String!
+    nickname: String!
+    email: String!
+    userPassword: String!
+    verifiedEmail: Boolean!
+    memberSince: String!
+    profilePicture: String!
+    isEnabled: Boolean!
+    userID: Int!
+    accountType: String!
+    lastLogon: String!
+    logonCount: Int!
+}
+
+input AccountInput {
+    givenName: String!
+    familyName: String!
+    age: Int!
+    gender: String!
+    nickname: String!
+    email: String!
+    userPassword: String!
+    verifiedEmail: Boolean!
+    memberSince: String!
+    profilePicture: String!
+    userID: Int!
+}

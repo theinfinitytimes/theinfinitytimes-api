@@ -1,0 +1,9 @@
+type Group {
+    name: String!
+    members: [ID!]!
+}
+
+input GroupInput {
+    name: String!
+    members: [ID!]
+}

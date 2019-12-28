@@ -1,0 +1,16 @@
+#import Account, AccountInput from './types/account.graphql'
+#import Post, PostInput from './types/post.graphql'
+#import Group, GroupInput from './types/group.graphql'
+#import Author, AuthorInput from './types/author.graphql'
+#import Tag, TagInput from './types/tag.graphql'
+#import User from './types/user.graphql'
+
+type Query {
+    user(nickname: String): User!
+    posts: [Post!]!
+    post(id: Int): Post!
+    account(userID: Int): Account!
+    author(account: ID!): Author!
+    group(name: String!): Group!
+    tag(name: String!): Tag!
+}

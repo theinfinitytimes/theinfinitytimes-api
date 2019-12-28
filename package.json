@@ -4,6 +4,7 @@
   "description": "This is the API of the website theinfinitytimes.com",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --exec npx babel-node index.js",
     "test": "npm run test"
   },
   "repository": {
@@ -19,5 +20,36 @@
   "bugs": {
     "url": "https://gitlab.com/theinfinitytimes/theinfinitytimes-api/issues"
   },
-  "homepage": "https://gitlab.com/theinfinitytimes/theinfinitytimes-api#readme"
+  "homepage": "https://gitlab.com/theinfinitytimes/theinfinitytimes-api#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.9.15",
+    "bcrypt": "^3.0.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5s",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.8",
+    "graphql-compose": "^7.6.0",
+    "graphql-compose-connection": "^6.0.3",
+    "graphql-compose-mongoose": "^7.3.0",
+    "graphql-s2s": "^0.20.2",
+    "graphql-tools": "^4.0.6",
+    "helmet": "^3.21.2",
+    "mongoose": "^5.7.12",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-timestamp": "^0.6.0",
+    "mongoose-type-email": "^1.0.11",
+    "mongoose-type-url": "^1.0.6",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.7.1",
+    "graphql-import": "^0.7.1"
+  }
 }

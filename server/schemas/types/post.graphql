@@ -1,0 +1,17 @@
+type Post {
+    title: String!
+    id: Int!
+    body: String!
+    author: ID!
+    dateCreated: String!
+    lastModified: String!
+    modifiedBy: ID!
+    picture: String!
+}
+
+input PostInput {
+    title: String!
+    body: String!
+    author: ID!
+    picture: String
+}
