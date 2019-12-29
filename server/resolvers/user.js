@@ -1,7 +1,6 @@
 const {UserModel} = require('../models/user');
 
 module.exports.user = async (_, args, req) => {
-    let user;
 
     if(args.nickname) {
         try {
@@ -10,7 +9,7 @@ module.exports.user = async (_, args, req) => {
             console.log(e);
         }
     } else {
-        return user = req.user;
+        return req.user;
     }
 };
 

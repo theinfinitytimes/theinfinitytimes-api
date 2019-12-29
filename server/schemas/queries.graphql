@@ -13,4 +13,5 @@ type Query {
     author(account: ID!): Author!
     group(name: String!): Group!
     tag(name: String!): Tag!
+    tags: Tag!
 }

@@ -1,5 +1,5 @@
 type Tag {
-    _id: ID!
+    _id: Int!
     name: String!
 }
 

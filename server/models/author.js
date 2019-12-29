@@ -6,7 +6,8 @@ const AuthorSchema = new Schema({
     account: {
         type: Schema.Types.ObjectId,
         ref: 'Account',
-        required: true
+        required: true,
+        unique: true
     },
     posts: {
         type: [Schema.Types.ObjectId],

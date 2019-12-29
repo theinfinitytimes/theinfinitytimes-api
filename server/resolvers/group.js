@@ -1,16 +1,17 @@
-const Group = require('../models/group');
+const {GroupModel} = require('../models/group');
 
 module.exports.group = async(_, args, req) => {
     try {
-        return await Group.findOne({name: args.name})
+        return await GroupModel.findOne({name: args.name})
     } catch (e) {
         console.log(e);
     }
 };
 
 module.exports.addGroup = async(_,args, req) => {
-    const group = new Group({
-        name: args.name
+    const group = new GroupModel({
+        name: args.group.name,
+        members: args.group.members || []
     });
     try {
         return await group.save();

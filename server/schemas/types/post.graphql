@@ -4,9 +4,10 @@ type Post {
     body: String!
     author: ID!
     dateCreated: String!
-    lastModified: String!
-    modifiedBy: ID!
-    picture: String!
+    lastModified: String
+    modifiedBy: ID
+    picture: String
+    tag: Int
 }
 
 input PostInput {
@@ -14,4 +15,5 @@ input PostInput {
     body: String!
     author: ID!
     picture: String
+    tag: Int
 }

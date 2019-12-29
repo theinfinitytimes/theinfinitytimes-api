@@ -1,14 +1,5 @@
 type Account {
-    givenName: String!
-    familyName: String!
-    age: Int!
-    gender: String!
-    nickname: String!
-    email: String!
-    userPassword: String!
-    verifiedEmail: Boolean!
-    memberSince: String!
-    profilePicture: String!
+    user: ID!
     isEnabled: Boolean!
     userID: Int!
     accountType: String!
@@ -26,6 +17,7 @@ input AccountInput {
     userPassword: String!
     verifiedEmail: Boolean!
     memberSince: String!
-    profilePicture: String!
+    profilePicture: String
     userID: Int!
+    accountType: String
 }

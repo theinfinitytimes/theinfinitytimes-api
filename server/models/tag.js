@@ -4,7 +4,7 @@ import {composeWithMongoose} from 'graphql-compose-mongoose';
 
 const TagSchema = new Schema({
    _id: {
-       type: Schema.Types.ObjectId,
+       type: Number,
        required: true
    },
     name: {
@@ -12,14 +12,6 @@ const TagSchema = new Schema({
         required: true
     }
 }, {collection: 'Tag'});
-
-TagSchema.pre('save', async function (next) {
-    const tag = this;
-    // This way we have an autoincrement in the _id of tag
-    const lastTag = await Tag.findAll({_id: {$exists: true}}).sort({_id: -1}).limit(1);
-    tag._id = lastTag._id + 1;
-    return next();
-});
 
 TagSchema.plugin(timestamps);
 

@@ -37,23 +37,13 @@ const PostSchema = new Schema({
     picture: {
         type: mongoose.SchemaTypes.Url,
         required: false
+    },
+    tag: {
+        type: Number,
+        required: false
     }
 }, {collection: 'Post'});
 
-
-PostSchema.pre('save', async function (next) {
-    const post = this;
-    if(post && post.hasOwnProperty('body') && !post.body.isModified){
-        return next;
-    }
-    post.dateCreated = new Date();
-    const lastPost = await Post.findAll({id: {$exists: true}}).sort({id: -1}).limit(1);
-    post.id = lastPost.id + 1;
-    if(post && post.hasOwnProperty('body') && post.body.isModified){
-        post.lastModified = new Date();
-        return next;
-    }
-});
 
 PostSchema.plugin(timestamps);
 
