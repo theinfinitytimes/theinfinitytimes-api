@@ -3,7 +3,7 @@ const {author, addAuthor} = require('./author');
 const {group, addGroup } = require('./group');
 const {post, posts, addPost} = require('./post');
 const {tag, tags, addTag} = require('./tag');
-const {user} = require('./user');
+const {user, editUser} = require('./user');
 
 module.exports.Query = {
     account,
@@ -23,5 +23,6 @@ module.exports.Mutation = {
     addAuthor,
     addGroup,
     addPost,
-    addTag
+    addTag,
+    editUser
 };

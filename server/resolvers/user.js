@@ -14,3 +14,15 @@ module.exports.user = async (_, args, req) => {
 };
 
 // Not implementing new user post as this should be done in the account model
+module.exports.editUser = async (_, args, req) => {
+    try {
+        const user = await UserModel.findOne({nickname: args.user.nickname});
+        console.log(user);
+        if(args.user.email && args.user.email !== user.email) {
+            args.user.email = user.email;
+        }
+        return await UserModel.findOneAndUpdate({nickname: user.nickname}, {$set: args.user});
+    } catch (e) {
+        console.log(e);
+    }
+};

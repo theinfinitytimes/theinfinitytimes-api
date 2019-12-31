@@ -10,4 +10,5 @@ type Mutation {
     addGroup(group: GroupInput): Group!
     addAuthor(author: AuthorInput): Author!
     addTag(tag: TagInput): Tag!
+    editUser(user: UserEditInput): User!
 }

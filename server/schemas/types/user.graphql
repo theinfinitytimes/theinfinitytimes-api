@@ -23,3 +23,14 @@ input registerUser {
     memberSince: String!
     profilePicture: String!
 }
+
+input UserEditInput {
+    givenName: String!
+    familyName: String!
+    age: Int!
+    gender: String!
+    nickname: String!
+    userPassword: String!
+    verifiedEmail: Boolean!
+    profilePicture: String!
+}

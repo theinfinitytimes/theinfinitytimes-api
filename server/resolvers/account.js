@@ -27,6 +27,7 @@ module.exports.registerAccount = async (_, args, req) => {
             memberSince: new Date(),
             profilePicture: args.account.profilePicture
         });
+
         const userResult = await user.save();
         let lastAccount = await AccountModel.find({userID: {$exists: true}}).sort({userID: -1}).limit(1);
         if(Array.isArray(lastAccount) && lastAccount.length > 0){

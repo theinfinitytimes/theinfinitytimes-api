@@ -18,6 +18,5 @@ input AccountInput {
     verifiedEmail: Boolean!
     memberSince: String!
     profilePicture: String
-    userID: Int!
     accountType: String
 }
