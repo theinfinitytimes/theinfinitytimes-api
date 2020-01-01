@@ -9,6 +9,10 @@ const AuthorSchema = new Schema({
         required: true,
         unique: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     posts: {
         type: [Schema.Types.ObjectId],
         ref: 'Post',

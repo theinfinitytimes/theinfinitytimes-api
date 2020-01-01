@@ -1,9 +1,11 @@
 type Author {
     account: ID!
+    description: String!
     posts: [ID!]!
 }
 
 input AuthorInput {
     account: ID!
+    description: String!
     posts: [ID!]
 }

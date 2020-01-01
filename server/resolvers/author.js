@@ -16,6 +16,7 @@ module.exports.addAuthor = async (_, args, req) => {
     }
     const author = new AuthorModel({
         account: args.author.account,
+        description: args.author.description,
         posts: []
     });
     try {
