@@ -17,12 +17,7 @@ const server = new ApolloServer({
     context: ({ req }) => req,
     debug: process.env.NODE_ENV === 'development',
     introspection: true,
-    playground: {
-        settings: {
-            'request.credentials': 'include',
-            'schema.polling.interval': 5000
-        }
-    }
+    playground: (process.env.NODE_ENV === 'development')
 });
 
 
