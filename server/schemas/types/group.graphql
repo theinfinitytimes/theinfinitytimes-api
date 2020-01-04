@@ -5,7 +5,13 @@ type Group {
 }
 
 input GroupInput {
-    id : Int!
+    id : Int
     name: String!
     members: [ID!]
+}
+
+input GroupDeleteInput {
+    _id: ID!
+    id: Int!
+    name: String!
 }

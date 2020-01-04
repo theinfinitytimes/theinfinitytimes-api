@@ -18,4 +18,5 @@ type Mutation {
     editAccount(account: AccountEditInput): Account!
     deleteAccount(account: AccountDeleteInput): Account
     deleteAuthor(author: AuthorDeleteInput): Author
+    deleteGroup(group: GroupDeleteInput): Group
 }

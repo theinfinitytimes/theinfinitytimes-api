@@ -42,3 +42,19 @@ module.exports.editGroup = async (_, args, req) => {
       throw new Error(e);
   }
 };
+
+module.exports.deleteGroup = async (_, args, req) => {
+  try {
+      let group = await GroupModel.findById(args.group._id);
+      if(args.group.name !== group.name){
+          throw new Error("The name of group doesn't match");
+      }
+      if (args.group.id !== group.id){
+          throw new Error("The id of the group is wrong")
+      }
+      return await GroupModel.findByIdAndDelete(args.group._id);
+  } catch (e) {
+      console.log(e);
+      throw e;
+  }
+};
