@@ -26,3 +26,24 @@ module.exports.addAuthor = async (_, args, req) => {
         console.log(e);
     }
 };
+
+module.exports.editAuthor = async (_, args, req) => {
+  try {
+      let author = await AuthorModel.findById(args.author._id);
+      if (!(author && (typeof author === 'object'))){
+          throw new Error("Author doesn't exist");
+      }
+      if(author.account.toString() !== args.author.account){
+          throw new Error("The account associated with the author object cannot be changed")
+      }
+      if(!args.author.posts && author.posts && Array.isArray(author.posts) && author.posts.length ){
+          args.author.posts = [];
+          author.posts.forEach(x => {
+              args.author.posts.push(x);
+          })
+      }
+      return await AuthorModel.findOneAndUpdate({_id: args.author._id}, {$set: args.author}, {new: true});
+  } catch (e){
+      console.log(e);
+  }
+};

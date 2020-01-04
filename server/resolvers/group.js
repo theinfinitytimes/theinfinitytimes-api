@@ -9,14 +9,36 @@ module.exports.group = async(_, args, req) => {
 };
 
 module.exports.addGroup = async(_,args, req) => {
+    let lastGroup = await GroupModel.find({id: {$exists: true}}).sort({id: -1}).limit(1);
+    if (Array.isArray(lastGroup) && lastGroup.length > 0) {
+        lastGroup = lastGroup[0]
+    }
     const group = new GroupModel({
+        id: lastGroup['id'] + 1,
         name: args.group.name,
-        members: args.group.members || []
+        members: []
     });
+    if(Array.isArray(lastGroup) && lastGroup.length === 0){
+        group.id = 0;
+    }
+    if(args.group.members && Array.isArray(args.group.members) && args.group.members.length > 0){
+        args.group.members.forEach(x =>{
+           group.members.push(x);
+        });
+    }
     try {
         return await group.save();
     } catch (e) {
         console.log('Could not save the group');
         console.log(e);
     }
+};
+
+module.exports.editGroup = async (_, args, req) => {
+  try {
+      return await GroupModel.findOneAndUpdate({id: args.group.id}, {$set: args.group}, {new: true});
+  } catch (e){
+      console.log(e);
+      throw new Error(e);
+  }
 };

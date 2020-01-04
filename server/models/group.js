@@ -3,12 +3,16 @@ import timestamps from 'mongoose-timestamp';
 import {composeWithMongoose} from 'graphql-compose-mongoose';
 
 const GroupSchema = new Schema({
-   name: {
-       type: String,
-       required: true
-   },
+    id: {
+        type: Number,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
     members: {
-       type: [Schema.Types.ObjectId],
+        type: [Schema.Types.ObjectId],
         ref: 'Account',
         required: true
     }

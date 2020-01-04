@@ -13,4 +13,6 @@ type Mutation {
     editUser(user: UserEditInput): User!
     editTag(tag: TagEditInput): Tag!
     editPost(post: PostEditInput): Post!
+    editGroup(group: GroupInput): Group!
+    editAuthor(author: AuthorInput): Author!
 }

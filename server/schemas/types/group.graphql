@@ -1,9 +1,11 @@
 type Group {
+    id: Int!
     name: String!
     members: [ID!]!
 }
 
 input GroupInput {
+    id : Int!
     name: String!
     members: [ID!]
 }

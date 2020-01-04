@@ -5,6 +5,7 @@ type Author {
 }
 
 input AuthorInput {
+    _id: ID!
     account: ID!
     description: String!
     posts: [ID!]
