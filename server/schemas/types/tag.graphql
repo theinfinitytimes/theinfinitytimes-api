@@ -6,3 +6,8 @@ type Tag {
 input TagInput {
     name: String!
 }
+
+input TagEditInput {
+    _id: Int!
+    name: String!
+}

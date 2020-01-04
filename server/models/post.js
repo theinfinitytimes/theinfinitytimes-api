@@ -35,11 +35,11 @@ const PostSchema = new Schema({
         required: false
     },
     picture: {
-        type: mongoose.SchemaTypes.Url,
+        type: [mongoose.SchemaTypes.Url],
         required: false
     },
-    tag: {
-        type: Number,
+    tags: {
+        type: [Number],
         required: false
     }
 }, {collection: 'Post'});

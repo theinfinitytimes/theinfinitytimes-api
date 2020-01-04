@@ -40,3 +40,15 @@ module.exports.addTag = async(_,args, req) => {
         console.log(e);
     }
 };
+
+module.exports.editTag = async (_, args, req) => {
+  const tag = await TagModel.findOne({_id: args.tag._id});
+  if(tag){
+      try {
+          return await TagModel.findOneAndUpdate({_id: args.tag._id}, {$set: args.tag}, {new: true});
+      } catch (e){
+          console.log(e);
+          throw new Error(e);
+      }
+  }
+};

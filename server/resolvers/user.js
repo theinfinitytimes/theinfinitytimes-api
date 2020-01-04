@@ -17,11 +17,10 @@ module.exports.user = async (_, args, req) => {
 module.exports.editUser = async (_, args, req) => {
     try {
         const user = await UserModel.findOne({nickname: args.user.nickname});
-        console.log(user);
         if(args.user.email && args.user.email !== user.email) {
             args.user.email = user.email;
         }
-        return await UserModel.findOneAndUpdate({nickname: user.nickname}, {$set: args.user});
+        return await UserModel.findOneAndUpdate({nickname: user.nickname}, {$set: args.user}, {new: true});
     } catch (e) {
         console.log(e);
     }

@@ -47,10 +47,9 @@ const connection = mongoose.connect(url, {
     bufferMaxEntries: 0,
     keepAlive: 120,
     poolSize: 50,
-    reconnectTries: 3,
-    reconnectInterval: 500,
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useFindAndModify: false
 });
 
 mongoose.set('useCreateIndex', true);

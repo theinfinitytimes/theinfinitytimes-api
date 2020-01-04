@@ -6,14 +6,24 @@ type Post {
     dateCreated: String!
     lastModified: String
     modifiedBy: ID
-    picture: String
-    tag: Int
+    picture: [String]
+    tags: [Int!]
 }
 
 input PostInput {
     title: String!
     body: String!
     author: ID!
-    picture: String
-    tag: Int
+    picture: [String]
+    tags: [Int!]
+}
+
+input PostEditInput {
+    id: Int!
+    title: String!
+    body: String!
+    author: ID!
+    picture: [String]
+    tags: [Int!]
+    modifiedBy: ID!
 }

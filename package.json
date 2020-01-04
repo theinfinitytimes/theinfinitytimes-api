@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec npx babel-node index.js",
+    "debug": "nodemon --inspect index.js",
     "test": "npm run test"
   },
   "repository": {
