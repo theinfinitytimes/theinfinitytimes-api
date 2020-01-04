@@ -1,4 +1,4 @@
-const {account, registerAccount, editAccount, deleteAccount} = require('./account');
+const {account, registerAccount, editAccount, deleteAccount, findAccountById} = require('./account');
 const {author, addAuthor, editAuthor, deleteAuthor} = require('./author');
 const {group, addGroup, editGroup, deleteGroup } = require('./group');
 const {post, posts, addPost, editPost, deletePost} = require('./post');
@@ -8,12 +8,13 @@ const {user, editUser} = require('./user');
 module.exports.Query = {
     account,
     author,
+    findAccountById,
     group,
     post,
     posts,
     tag,
     tags,
-    user,
+    user
 };
 
 

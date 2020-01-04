@@ -109,6 +109,15 @@ module.exports.deleteAccount = async(_, args, req) => {
       }
   } catch (e) {
       console.log(e);
-      throw new Error(e);
+      throw e;
   }
+};
+
+module.exports.findAccountById = async(_, args, req)=> {
+    try {
+        return await AccountModel.findById(args._id);
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
 };
