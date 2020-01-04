@@ -1,5 +1,6 @@
 const {UserModel} = require('../models/user');
 const {AccountModel} = require('../models/account');
+const {AuthorModel} = require('../models/author');
 
 module.exports.account = async (_, args, req) => {
     try {
@@ -70,6 +71,41 @@ module.exports.editAccount = async(_, args, req)=> {
           return await AccountModel.findOneAndUpdate({_id: args.account._id}, {$set: args.account}, {new: true});
       } else {
           throw new Error ("Couldn't find an account with this _id");
+      }
+  } catch (e) {
+      console.log(e);
+      throw new Error(e);
+  }
+};
+
+module.exports.deleteAccount = async(_, args, req) => {
+  try {
+      let account = await AccountModel.findById(args.account._id);
+      if( account && (typeof account === 'object')){
+          if(account.user.toString() !== args.account.user){
+              throw new Error("The user associated with this account is wrong");
+          }
+          if ( account.userID !== args.account.userID){
+              throw new Error("The userID of this account is wrong");
+          }
+          let author = await AuthorModel.findOne({account: args.account._id});
+          if(author && Array.isArray(author) && author.length > 0){
+              author = author[0];
+          }
+          if(author) {
+              await AuthorModel.findByIdAndDelete(author._id);
+          }
+          let user = await UserModel.findById(args.account.user.toString());
+          if(user && (typeof user === 'object')){
+              const result = await UserModel.findByIdAndDelete(args.account.user);
+              if(result) {
+                  return await AccountModel.findByIdAndDelete(args.account._id);
+              }
+          } else {
+              throw new Error ("An error occurred trying to find the user. Try again later");
+          }
+      } else {
+          throw new Error(" Couldn't find the specified account");
       }
   } catch (e) {
       console.log(e);

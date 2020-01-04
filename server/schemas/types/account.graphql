@@ -30,3 +30,9 @@ input AccountEditInput {
     lastLogon: String
     logonCount: Int
 }
+
+input AccountDeleteInput {
+    _id: ID!
+    user: ID!
+    userID: Int!
+}
