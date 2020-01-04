@@ -48,7 +48,22 @@ module.exports.editTag = async (_, args, req) => {
           return await TagModel.findOneAndUpdate({_id: args.tag._id}, {$set: args.tag}, {new: true});
       } catch (e){
           console.log(e);
-          throw new Error(e);
+          throw e;
       }
   }
+};
+
+module.exports.deleteTag = async (_, args, req) => {
+  const tag = await TagModel.findById(args.tag._id);
+      if(tag){
+          if(tag.name !== args.tag.name){
+              throw new Error("The name of tags doesn't match");
+          }
+          try {
+              return await TagModel.findByIdAndDelete(args.tag._id);
+          } catch (e) {
+              console.log(e);
+              throw e;
+          }
+      }
 };

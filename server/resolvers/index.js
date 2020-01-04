@@ -2,7 +2,7 @@ const {account, registerAccount, editAccount, deleteAccount} = require('./accoun
 const {author, addAuthor, editAuthor, deleteAuthor} = require('./author');
 const {group, addGroup, editGroup, deleteGroup } = require('./group');
 const {post, posts, addPost, editPost, deletePost} = require('./post');
-const {tag, tags, addTag, editTag} = require('./tag');
+const {tag, tags, addTag, editTag, deleteTag} = require('./tag');
 const {user, editUser} = require('./user');
 
 module.exports.Query = {
@@ -33,5 +33,6 @@ module.exports.Mutation = {
     deleteAccount,
     deleteAuthor,
     deleteGroup,
-    deletePost
+    deletePost,
+    deleteTag
 };

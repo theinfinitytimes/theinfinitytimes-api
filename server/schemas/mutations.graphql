@@ -20,4 +20,5 @@ type Mutation {
     deleteAuthor(author: AuthorDeleteInput): Author
     deleteGroup(group: GroupDeleteInput): Group
     deletePost(post: PostDeleteInput): Post
+    deleteTag(tag: TagEditInput): Tag
 }
