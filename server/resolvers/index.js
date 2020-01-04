@@ -1,4 +1,4 @@
-const {account, registerAccount} = require('./account');
+const {account, registerAccount, editAccount} = require('./account');
 const {author, addAuthor, editAuthor} = require('./author');
 const {group, addGroup, editGroup } = require('./group');
 const {post, posts, addPost, editPost} = require('./post');
@@ -28,5 +28,6 @@ module.exports.Mutation = {
     editTag,
     editPost,
     editGroup,
-    editAuthor
+    editAuthor,
+    editAccount
 };

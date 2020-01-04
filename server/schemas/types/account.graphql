@@ -20,3 +20,13 @@ input AccountInput {
     profilePicture: String
     accountType: String
 }
+
+input AccountEditInput {
+    _id: ID!
+    user: ID!
+    isEnabled: Boolean!
+    userID: Int!
+    accountType: String!
+    lastLogon: String
+    logonCount: Int
+}

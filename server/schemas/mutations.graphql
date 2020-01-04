@@ -15,4 +15,5 @@ type Mutation {
     editPost(post: PostEditInput): Post!
     editGroup(group: GroupInput): Group!
     editAuthor(author: AuthorInput): Author!
+    editAccount(account: AccountEditInput): Account!
 }

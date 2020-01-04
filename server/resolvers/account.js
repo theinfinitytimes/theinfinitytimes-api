@@ -50,3 +50,29 @@ module.exports.registerAccount = async (_, args, req) => {
         console.log(e);
     }
 };
+
+module.exports.editAccount = async(_, args, req)=> {
+  try{
+      let account = await AccountModel.findById(args.account._id);
+      if(account && (typeof account === 'object')){
+          if(account.user.toString() !== args.account.user){
+              throw new Error("The user associated with an account cannot be changed");
+          }
+          if ( account.userID !== args.account.userID){
+              throw new Error("The userID cannot be changed");
+          }
+          if (!(args.account.lastLogon)){
+              args.account.lastLogon = new Date();
+          }
+          if( !(args.account.logonCount)){
+              args.account.logonCount = account.logonCount;
+          }
+          return await AccountModel.findOneAndUpdate({_id: args.account._id}, {$set: args.account}, {new: true});
+      } else {
+          throw new Error ("Couldn't find an account with this _id");
+      }
+  } catch (e) {
+      console.log(e);
+      throw new Error(e);
+  }
+};
