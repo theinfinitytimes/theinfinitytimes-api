@@ -47,3 +47,20 @@ module.exports.editAuthor = async (_, args, req) => {
       console.log(e);
   }
 };
+
+module.exports.deleteAuthor = async (_, args, req) => {
+  try{
+      let author = await AuthorModel.findById(args.author._id);
+      if(author && (typeof author === 'object')){
+          if(args.author.account !== author.account.toString()){
+              throw new Error("The account _id doesn't match the author's account _id");
+          }
+          return await AuthorModel.findByIdAndDelete(args.author._id);
+      } else {
+          throw new Error("Couldn't find the author specified");
+      }
+  } catch (e) {
+      console.log(e);
+      throw new Error(e);
+  }
+};

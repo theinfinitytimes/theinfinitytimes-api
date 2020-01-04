@@ -17,4 +17,5 @@ type Mutation {
     editAuthor(author: AuthorInput): Author!
     editAccount(account: AccountEditInput): Account!
     deleteAccount(account: AccountDeleteInput): Account
+    deleteAuthor(author: AuthorDeleteInput): Author
 }

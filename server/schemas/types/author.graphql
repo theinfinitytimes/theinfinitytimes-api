@@ -10,3 +10,8 @@ input AuthorInput {
     description: String!
     posts: [ID!]
 }
+
+input AuthorDeleteInput {
+    _id: ID!
+    account: ID!
+}
