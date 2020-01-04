@@ -49,7 +49,7 @@ module.exports.addPost = async (_, args, req) => {
         if (Array.isArray(author) && author.length > 0) {
             author = author[0];
         }
-        author['posts'].push(result._id);
+        author['posts'].push(result._id.toString());
         await author.save();
         return result;
     } catch (e) {
@@ -76,6 +76,43 @@ module.exports.editPost = async (_, args, req) => {
         } catch (e) {
             console.log(e);
             throw new Error(e);
+        }
+    }
+};
+
+module.exports.deletePost = async (_, args, req) => {
+    let post = await PostModel.findById(args.post._id);
+    if (post && (typeof post === 'object')) {
+        if (args.post.id !== post.id) {
+            throw new Error("The post ids don't match ");
+        }
+        if (args.post.title !== post.title) {
+            throw new Error("The titles don't match");
+        }
+        if (args.post.author !== post.author.toString()) {
+            throw new Error("The authors don't match");
+        }
+        try {
+            const author = await AuthorModel.findById(args.post.author);
+            if (author) {
+                let posts = [];
+                author.posts.forEach(x => {
+                    if (x.toString() !== args.post._id) {
+                        posts.push(x);
+                    }
+                });
+                author.posts = [];
+                posts.forEach(x => {
+                    author.posts.push(x);
+                });
+                await author.save();
+                return await PostModel.findOneAndDelete(args.post._id);
+            } else {
+                throw new Error("Couldn't find the author");
+            }
+        } catch (e) {
+            console.log(e);
+            throw e;
         }
     }
 };

@@ -27,3 +27,10 @@ input PostEditInput {
     tags: [Int!]
     modifiedBy: ID!
 }
+
+input PostDeleteInput {
+    _id: ID!
+    id:Int!
+    title: String!
+    author: ID!
+}
