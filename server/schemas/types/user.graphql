@@ -1,4 +1,5 @@
 type User {
+    _id: ID!
     givenName: String!
     familyName: String!
     age: Int!

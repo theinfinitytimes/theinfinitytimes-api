@@ -25,3 +25,12 @@ module.exports.editUser = async (_, args, req) => {
         console.log(e);
     }
 };
+
+module.exports.findUserById = async(_, args, req)=> {
+    try {
+        return await UserModel.findById(args._id);
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};

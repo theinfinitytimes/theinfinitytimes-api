@@ -3,12 +3,13 @@ const {author, addAuthor, editAuthor, deleteAuthor} = require('./author');
 const {group, addGroup, editGroup, deleteGroup } = require('./group');
 const {post, posts, addPost, editPost, deletePost} = require('./post');
 const {tag, tags, addTag, editTag, deleteTag} = require('./tag');
-const {user, editUser} = require('./user');
+const {user, editUser, findUserById} = require('./user');
 
 module.exports.Query = {
     account,
     author,
     findAccountById,
+    findUserById,
     group,
     post,
     posts,

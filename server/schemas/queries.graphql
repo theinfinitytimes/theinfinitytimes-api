@@ -10,9 +10,10 @@ type Query {
     posts: [Post!]!
     post(id: Int): Post!
     account(userID: Int): Account!
-    author(account: ID!): Author!
+    author(_id: String): Author!
     group(name: String!): Group!
     tag(name: String!): Tag!
     tags: Tag!
     findAccountById(_id: String): Account
+    findUserById(_id: String!): User
 }
