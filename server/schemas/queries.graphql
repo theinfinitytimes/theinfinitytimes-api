@@ -16,4 +16,5 @@ type Query {
     tags: Tag!
     findAccountById(_id: String): Account
     findUserById(_id: String!): User
+    postsByTag(tag: Int!): [Post!]
 }
