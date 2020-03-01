@@ -119,7 +119,7 @@ module.exports.deletePost = async (_, args, req) => {
 
 module.exports.postsByTag = async(_, args, req) => {
   try {
-      if(args.tag && (typeof args.tag === 'number')) {
+      if(args.tag !== undefined && (typeof args.tag === 'number')) {
           return await PostModel.find({tags: args.tag}).sort({id: -1});
       } else {
           throw new Error("Tag can only be a integer");
