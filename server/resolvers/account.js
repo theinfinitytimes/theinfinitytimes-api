@@ -1,6 +1,8 @@
 const {UserModel} = require('../models/user');
 const {AccountModel} = require('../models/account');
 const {AuthorModel} = require('../models/author');
+const {ForbiddenError} = require('apollo-server-express');
+
 
 module.exports.account = async (_, args, req) => {
     try {
@@ -68,7 +70,13 @@ module.exports.editAccount = async(_, args, req)=> {
           if( !(args.account.logonCount)){
               args.account.logonCount = account.logonCount;
           }
-          return await AccountModel.findOneAndUpdate({_id: args.account._id}, {$set: args.account}, {new: true});
+          req.user = {...req.user, ...(await req.user.checkAuthentication())};
+          const reqUser = req.user._doc;
+          if(reqUser && reqUser._id && reqUser._id.toString() === args.account._id) {
+              return await AccountModel.findOneAndUpdate({_id: args.account._id}, {$set: args.account}, {new: true});
+          } else {
+              throw new ForbiddenError('403-FORBIDDEN')
+          }
       } else {
           throw new Error ("Couldn't find an account with this _id");
       }
@@ -80,32 +88,38 @@ module.exports.editAccount = async(_, args, req)=> {
 
 module.exports.deleteAccount = async(_, args, req) => {
   try {
-      let account = await AccountModel.findById(args.account._id);
-      if( account && (typeof account === 'object')){
-          if(account.user.toString() !== args.account.user){
-              throw new Error("The user associated with this account is wrong");
-          }
-          if ( account.userID !== args.account.userID){
-              throw new Error("The userID of this account is wrong");
-          }
-          let author = await AuthorModel.findOne({account: args.account._id});
-          if(author && Array.isArray(author) && author.length > 0){
-              author = author[0];
-          }
-          if(author) {
-              await AuthorModel.findByIdAndDelete(author._id);
-          }
-          let user = await UserModel.findById(args.account.user.toString());
-          if(user && (typeof user === 'object')){
-              const result = await UserModel.findByIdAndDelete(args.account.user);
-              if(result) {
-                  return await AccountModel.findByIdAndDelete(args.account._id);
+      req.user = {...req.user, ...(await req.user.checkAuthentication())};
+      const reqUser = req.user._doc;
+      if(reqUser && reqUser._id && reqUser._id === args.account._id) {
+          let account = await AccountModel.findById(args.account._id);
+          if (account && (typeof account === 'object')) {
+              if (account.user.toString() !== args.account.user) {
+                  throw new Error("The user associated with this account is wrong");
+              }
+              if (account.userID !== args.account.userID) {
+                  throw new Error("The userID of this account is wrong");
+              }
+              let author = await AuthorModel.findOne({account: args.account._id});
+              if (author && Array.isArray(author) && author.length > 0) {
+                  author = author[0];
+              }
+              if (author) {
+                  await AuthorModel.findByIdAndDelete(author._id);
+              }
+              let user = await UserModel.findById(args.account.user.toString());
+              if (user && (typeof user === 'object')) {
+                  const result = await UserModel.findByIdAndDelete(args.account.user);
+                  if (result) {
+                      return await AccountModel.findByIdAndDelete(args.account._id);
+                  }
+              } else {
+                  throw new Error("An error occurred trying to find the user. Try again later");
               }
           } else {
-              throw new Error ("An error occurred trying to find the user. Try again later");
+              throw new Error(" Couldn't find the specified account");
           }
       } else {
-          throw new Error(" Couldn't find the specified account");
+          throw new ForbiddenError('403-Forbidden')
       }
   } catch (e) {
       console.log(e);
