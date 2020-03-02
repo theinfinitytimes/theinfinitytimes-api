@@ -2,10 +2,16 @@ const {UserModel} = require('../models/user');
 const {ForbiddenError} = require('apollo-server-express');
 
 module.exports.user = async (_, args, req) => {
-
+    req.user = {...req.user, ...(await req.user.checkAuthentication())};
+    const reqUser = req.user._doc;
     if(args.nickname) {
         try {
-            return await UserModel.findOne({nickname: args.nickname});
+            const user = await UserModel.findOne({nickname: args.nickname});
+            if(reqUser && (reqUser.accountType === "admin" || reqUser.user.toString() === user._id)){
+                return user
+            } else {
+                throw new ForbiddenError('403-Forbidden');
+            }
         } catch (e) {
             console.log(e);
         }
