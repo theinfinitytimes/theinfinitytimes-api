@@ -5,6 +5,7 @@ const { ApolloServer } = require('apollo-server-express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const auth = require('./server/middlewares/auth');
 const {typeDefs, resolvers} = require('./server');
 const routes = require('./server/routes/routes');
 dotenv.config();
@@ -32,6 +33,7 @@ app.use(cors({
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(auth);
 app.use('/api', routes);
 
 server.applyMiddleware({ app });
