@@ -55,24 +55,46 @@ module.exports.addComment = async (_, args, req) => {
 module.exports.editComment = async (_, args, req) => {
     req.user = {...req.user, ...(await req.user.checkAuthentication())};
     const reqUser = req.user._doc;
-    if(reqUser && reqUser.accountType) {
-        let post = await PostModel.findOne({id: args.post.id});
-        if (post) {
-            args.post.lastModified = new Date();
-            if (post.author !== args.post.author) {
-                args.post.author = post.author;
-            }
-            try {
-                if (post.tags !== args.post.tags) {
-                    return await PostModel.findOneAndUpdate({id: args.post.id}, {
-                        $set: args.post,
-                        $push: {'post.tags': {$each: args.post.tags}}
-                    }, {new: true});
+    if(reqUser) {
+        let comment = await CommentModel.findOne({id: args.comment.id});
+        if(comment){
+            if(comment.user.toString() === reqUser || reqUser.accountType === 'admin'){
+                if(comment.post === args.comment.post) {
+                    const newComment = args.comment;
+                    newComment.lastModified = new Date();
+                    newComment.modifiedBy = reqUser._id;
+                    return CommentModel.findOneAndUpdate({id: args.comment.id}, {$set: newComment}, {new: true});
+                } else {
+                    throw new Error(`Comment post _id and args post _id don't match`);
                 }
-            } catch (e) {
-                console.log(e);
-                throw new Error(e);
+            } else {
+                throw new ForbiddenError('403-Forbidden')
             }
+        } else {
+            throw new Error('Comment was not found');
+        }
+    } else {
+        throw new ForbiddenError('403-Forbidden');
+    }
+};
+
+module.exports.deleteComment = async (_, args, req) => {
+    req.user = {...req.user, ...(await req.user.checkAuthentication())};
+    const reqUser = req.user._doc;
+    if(reqUser) {
+        let comment = await CommentModel.findOne({id: args.comment.id});
+        if(comment){
+            if(comment.user.toString() === reqUser || reqUser.accountType === 'admin'){
+                if(comment.post.toString() === args.comment.post) {
+                    return CommentModel.findOneAndDelete({id: args.comment.id});
+                } else {
+                    throw new Error(`Comment post _id and args post _id don't match`);
+                }
+            } else {
+                throw new ForbiddenError('403-Forbidden')
+            }
+        } else {
+            throw new Error('Comment was not found');
         }
     } else {
         throw new ForbiddenError('403-Forbidden');

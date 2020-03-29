@@ -4,7 +4,7 @@ const {group, addGroup, editGroup, deleteGroup } = require('./group');
 const {post, posts, addPost, editPost, deletePost, postsByTag} = require('./post');
 const {tag, tags, addTag, editTag, deleteTag} = require('./tag');
 const {user, editUser, findUserById} = require('./user');
-const {getComment, getAllComments, addComment} = require('./comment');
+const {getComment, getAllComments, addComment, editComment, deleteComment} = require('./comment');
 
 module.exports.Query = {
     account,
@@ -37,8 +37,10 @@ module.exports.Mutation = {
     editGroup,
     editAuthor,
     editAccount,
+    editComment,
     deleteAccount,
     deleteAuthor,
+    deleteComment,
     deleteGroup,
     deletePost,
     deleteTag

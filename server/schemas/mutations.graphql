@@ -18,9 +18,10 @@ type Mutation {
     editGroup(group: GroupInput): Group!
     editAuthor(author: AuthorInput): Author!
     editAccount(account: AccountEditInput): Account!
-    editComment(comment: CommentEditInput): Comment
+    editComment(comment: CommentEditInput): Comment!
     deleteAccount(account: AccountDeleteInput): Account
     deleteAuthor(author: AuthorDeleteInput): Author
+    deleteComment(comment: CommentInput): Comment
     deleteGroup(group: GroupDeleteInput): Group
     deletePost(post: PostDeleteInput): Post
     deleteTag(tag: TagEditInput): Tag
