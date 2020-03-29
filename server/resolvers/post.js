@@ -165,7 +165,24 @@ module.exports.deletePost = async (_, args, req) => {
 module.exports.postsByTag = async(_, args, req) => {
   try {
       if(args.tag !== undefined && (typeof args.tag === 'number')) {
-          return await PostModel.find({tags: args.tag}).sort({id: -1});
+          const posts =  await PostModel.find({tags: args.tag});
+          return posts.map(async (post) => {
+              const comments = await CommentModel.find({post: post._doc._id});
+              const author = await AuthorModel.findById(post._doc.author);
+              const account = await AccountModel.findById(author._doc.account);
+              account._doc.user =await UserModel.findById(account._doc.user);
+              author._doc.account = account;
+              post._doc.author = author;
+              if(!post._doc.comments){
+                  post._doc.comments = []
+              }
+              if(comments && comments.length) {
+                  post._doc.comments = [...comments];
+              } else {
+                  post._doc.comments = []
+              }
+              return post;
+          });
       } else {
           throw new Error("Tag can only be a integer");
       }
