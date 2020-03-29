@@ -27,7 +27,7 @@ module.exports.addComment = async (_, args, req) => {
             lastComment = lastComment[0]
         }
         const comment = new CommentModel({
-            id: lastComment.id,
+            id: ++lastComment.id,
             body: args.comment.body,
             user: args.comment.user,
             post: args.comment.post,

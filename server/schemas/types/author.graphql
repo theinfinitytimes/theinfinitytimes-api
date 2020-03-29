@@ -1,5 +1,5 @@
 type Author {
-    account: ID!
+    account: Account!
     description: String!
     posts: [ID!]!
 }

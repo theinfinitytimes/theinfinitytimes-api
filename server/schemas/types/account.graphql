@@ -1,5 +1,5 @@
 type Account {
-    user: ID!
+    user: User!
     isEnabled: Boolean!
     userID: Int!
     accountType: String!

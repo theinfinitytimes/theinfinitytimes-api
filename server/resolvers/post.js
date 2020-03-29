@@ -1,17 +1,45 @@
+const {UserModel} = require('../models/user');
+const {AccountModel} = require('../models/account');
+const {CommentModel} = require('../models/comment');
 const {AuthorModel} = require('../models/author');
 const {PostModel} = require('../models/post');
 const {ForbiddenError} = require('apollo-server-express');
 
 module.exports.post = async (_, args, req) => {
     try {
-        return await PostModel.findOne({id: args.id})
+        const post = await PostModel.findOne({id: args.id});
+        const comments = await CommentModel.find({post: post._doc._id});
+        const author = await AuthorModel.findById(post._doc.author);
+        const account = await AccountModel.findById(author._doc.account);
+        account._doc.user =await UserModel.findById(account._doc.user);
+        author._doc.account = account;
+        post._doc.author = author;
+        post._doc.comments = [...comments];
+        return post;
     } catch (e) {
         console.log(e);
     }
 };
 module.exports.posts = async (_, args, req) => {
     try {
-        return await PostModel.find({_id: {$exists: true}});
+        const posts =  await PostModel.find({_id: {$exists: true}});
+        return await posts.map(async (post) => {
+            const comments = await CommentModel.find({post: post._doc._id});
+            const author = await AuthorModel.findById(post._doc.author);
+            const account = await AccountModel.findById(author._doc.account);
+            account._doc.user =await UserModel.findById(account._doc.user);
+            author._doc.account = account;
+            post._doc.author = author;
+            if(!post._doc.comments){
+                post._doc.comments = []
+            }
+            if(comments && comments.length) {
+                post._doc.comments = [...comments];
+            } else {
+                post._doc.comments = []
+            }
+            return post;
+        });
     } catch (e) {
         console.log(e);
     }
