@@ -4,6 +4,8 @@
 #import Author, AuthorInput from './types/author.graphql'
 #import Tag, TagInput from './types/tag.graphql'
 #import User from './types/user.graphql'
+#import Comment from './types/comment.graphql'
+
 
 type Query {
     user(nickname: String): User!
@@ -17,4 +19,6 @@ type Query {
     findAccountById(_id: String): Account
     findUserById(_id: String!): User
     postsByTag(tag: Int!): [Post!]
+    getComment(comment: Int!): Comment
+    getAllComments: [Comment]
 }

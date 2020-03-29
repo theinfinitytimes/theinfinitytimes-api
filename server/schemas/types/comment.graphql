@@ -1,0 +1,27 @@
+type Comment {
+    id: Int
+    body: String!
+    user: ID!
+    post: ID!
+    dateCreated: String
+    lastModified: String
+    modifiedBy: ID!
+}
+
+input CommentInput {
+    id: Int
+    body: String!
+    user: ID!
+    post: ID!
+    dateCreated: String
+    lastModified: String
+}
+
+input CommentEditInput {
+    id: Int
+    body: String!
+    user: ID!
+    post: ID!
+    lastModified: String
+    modifiedBy: ID!
+}

@@ -16,6 +16,10 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
+    summary: {
+        type: String,
+        required: false
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'Author',
@@ -40,6 +44,11 @@ const PostSchema = new Schema({
     },
     tags: {
         type: [Number],
+        required: false
+    },
+    comments: {
+        type: [Number],
+        ref: 'Comment',
         required: false
     }
 }, {collection: 'Post'});
