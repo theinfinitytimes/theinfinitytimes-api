@@ -9,4 +9,4 @@ RUN npm install
 COPY . /theinfinitytimes-api
 RUN mv .env.example .env
 
-CMD npm start:prod
+CMD npm run start:prod
