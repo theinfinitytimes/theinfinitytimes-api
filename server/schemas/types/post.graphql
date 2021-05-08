@@ -1,6 +1,7 @@
 #import Comment from "./comment.graphql";
 
 type Post {
+    _id: ID!
     title: String!
     id: Int!
     body: String!
@@ -16,6 +17,7 @@ type Post {
 input PostInput {
     title: String!
     body: String!
+    summary: String
     author: ID!
     picture: [String]
     tags: [Int!]

@@ -143,3 +143,12 @@ module.exports.findAccountById = async(_, args, req)=> {
         throw e;
     }
 };
+
+module.exports.accountByUser = async(_, args, req)=> {
+    try {
+        return await AccountModel.findOne({user: args.id});
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
