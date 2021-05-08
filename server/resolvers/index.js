@@ -1,5 +1,5 @@
-const {account, registerAccount, editAccount, deleteAccount, findAccountById} = require('./account');
-const {author, addAuthor, editAuthor, deleteAuthor} = require('./author');
+const {account, registerAccount, editAccount, deleteAccount, findAccountById, accountByUser} = require('./account');
+const {author, addAuthor, editAuthor, deleteAuthor, authorByAccount} = require('./author');
 const {group, addGroup, editGroup, deleteGroup } = require('./group');
 const {post, posts, addPost, editPost, deletePost, postsByTag} = require('./post');
 const {tag, tags, addTag, editTag, deleteTag} = require('./tag');
@@ -8,7 +8,9 @@ const {getComment, getAllComments, addComment, editComment, deleteComment} = req
 
 module.exports.Query = {
     account,
+    accountByUser,
     author,
+    authorByAccount,
     findAccountById,
     findUserById,
     getAllComments,

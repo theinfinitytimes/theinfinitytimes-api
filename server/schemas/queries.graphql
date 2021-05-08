@@ -12,10 +12,12 @@ type Query {
     posts: [Post!]!
     post(id: Int): Post!
     account(userID: Int): Account!
+    accountByUser(id: ID!): Account
     author(_id: String): Author!
+    authorByAccount(id: ID!): Author
     group(name: String!): Group!
     tag(name: String!): Tag!
-    tags: Tag!
+    tags: [Tag!]
     findAccountById(_id: String): Account
     findUserById(_id: String!): User
     postsByTag(tag: Int!): [Post!]

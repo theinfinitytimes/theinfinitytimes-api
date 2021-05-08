@@ -78,3 +78,12 @@ module.exports.deleteAuthor = async (_, args, req) => {
         throw new ForbiddenError('403-Forbidden');
     }
 };
+
+module.exports.authorByAccount = async(_, args, req)=> {
+    try {
+        return await AuthorModel.findOne({account: args.id});
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};

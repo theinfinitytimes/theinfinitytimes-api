@@ -1,4 +1,5 @@
 type Group {
+    _id: ID!
     id: Int!
     name: String!
     members: [ID!]!

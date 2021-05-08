@@ -12,7 +12,7 @@ module.exports.tag = async(_, args, req) => {
 
 module.exports.tags = async (_, args, req) => {
   try {
-      return await TagModel.find({});
+      return await TagModel.find({_id: {$exists: true}});
   } catch (err) {
       console.log(err);
   }
